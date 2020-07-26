@@ -11,10 +11,10 @@ from multiprocessing import Pool
 
 DEBUG = True
 
-def request2IRIS(args):
-    return _request2IRIS(*args)
+#def request2IRIS(args):
+#    return _request2IRIS(*args)
 
-def _request2IRIS(fdsn_client, datadir, net, sta, comp, loc, time):
+def request2IRIS(fdsn_client, datadir, net, sta, comp, loc, time):
     starttime, endtime = time
     firstordinal = UTCDateTime(starttime.year, 1, 1).toordinal() - 1
     origin = '%d.%03d' %(starttime.year, starttime.toordinal()-firstordinal)
@@ -75,7 +75,7 @@ def askIRIS(datadir, client, stas, comps, locs, starttime, endtime, ncpu):
     print('find {} requests..'.format(len(requests)))
     # --- loop
     pool = Pool(ncpu)
-    logs = pool.map_async(request2IRIS, requests).get(9999999)
+    logs = pool.starmap(request2IRIS, requests)
     pool.close()
     pool.join()
     print('request terminated')

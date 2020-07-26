@@ -17,15 +17,7 @@ stations = {'NZ':['MCHZ', 'NMHZ', 'NTVZ', 'SNVZ', 'TMVZ','BKZ', 'ETVZ',
 components = ['HH*', 'EH*']
 locations = ['']
 
-# -- Marlborough
-#stations = {'XB': list(np.loadtxt('/home/florent/work/marlborough/catalogs/stations.latlon', usecols=(0), dtype=str))}
-#components = ['SH*'] # can be list of str or single str
-#locations = [''] # can be list of str or single str
-
-#datadir = '/home/florent/work/atacama/data'
-#datadir = '/home/florent/work/magallanes-fagnano/data'
-#datadir = '/home/florent/work/marlborough/data'
-datadir = '/home/florent/work/hikurangi/data'
+datadir = '/nobackup1c/faden/lfe_hikurangi/data'
 
 ncpu = 16 # number of cpu to use
 
