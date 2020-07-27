@@ -47,7 +47,6 @@ def askIRIS(datadir, client, stas, comps, locs, starttime, endtime, ncpu):
 
     if not isinstance(comps, list):
         comps = [comps]
-
     if not isinstance(locs, list):
         locs = [locs]
 
@@ -65,14 +64,13 @@ def askIRIS(datadir, client, stas, comps, locs, starttime, endtime, ncpu):
         print("bad time period...")
         exit()
 
+
     # --- flattening of request to pool distribution
-    times = zip(starttimes, endtimes)
+    times = list(zip(starttimes, endtimes))
     requests = [(fdsn_client, datadir,  k, sta, comp, loc, time) for k in stas.keys() \
-                                                       for sta in stas[k] \
-                                                       for comp in comps \
-                                                       for loc in locs \
-                                                       for time in times]
+                for sta in stas[k] for comp in comps for loc in locs for time in times]
     print('find {} requests..'.format(len(requests)))
+
     # --- loop
     pool = Pool(ncpu)
     logs = pool.starmap(request2IRIS, requests)
